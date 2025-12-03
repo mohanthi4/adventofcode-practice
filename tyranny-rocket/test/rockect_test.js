@@ -1,4 +1,4 @@
-import { fuelRequirement, roundedDivision } from "../src/rockect.js";
+import { fuelRequirement, roundedDivision, totalFuel } from "../src/rockect.js";
 import { assertEquals } from "@std/assert";
 
 Deno.test("module 1 : division by 3 and rounded", () => {
@@ -29,4 +29,9 @@ Deno.test("module 3 : fuel", () => {
 Deno.test("module 4 : fuel", () => {
   const input = 100756;
   assertEquals(fuelRequirement(input), 33583);
+});
+
+Deno.test("input data", () => {
+  const input = Deno.readTextFileSync("./data/input.txt");
+  assertEquals(totalFuel(input), 3332538);
 });
