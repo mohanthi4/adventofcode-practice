@@ -2,13 +2,15 @@ import { distinct } from "jsr:@std/collections";
 
 
 const instructions = (data, array, { x, y }) => {
-  const val = parseInt(data[1]);
+  // console.log(data)
+  const val = parseInt(data.slice(1));
+  // console.log(val)
   switch (data[0]) {
     case "R":
       for (let i = 0; i <= val; i++) {
         array.push([x++, y]);
       }
-
+      // console.log(array)
       return { x: array[array.length - 1][0], y: array[array.length - 1][1] };
 
     case "U":
@@ -31,8 +33,9 @@ const instructions = (data, array, { x, y }) => {
   }
 };
 
-const ins = "R8,U5,L5,D3";
-const instru = ins.split(",").map((x) => x.split(""));
+const ins = "R75,D30,R83,U83,L12,D49,R71,U7,L72";
+const instru = ins.split(",");
+// console.log(instru)
 let arr = [];
 let axixs = { x: 0, y: 0 };
 for (let i = 0; i < instru.length; i++) {
@@ -43,8 +46,9 @@ for (let i = 0; i < instru.length; i++) {
 // console.log(arr);
 
 // console.log("..........");
-const ins2 = "U7,R6,D4,L4";
-const instru2 = ins2.split(",").map((x) => x.split(""));
+const ins2 = "U62,R66,U55,R34,D71,R55,D58,R83";
+const instru2 = ins2.split(",");
+// console.log(instru2)
 let arr2 = [];
 let axixs2 = { x: 0, y: 0 };
 for (let i = 0; i < instru2.length; i++) {
@@ -63,7 +67,15 @@ const data1 = arr.map((x) => {
 // console.log(data1);
 const ud = distinct(data1);
 const ud2 = ud.slice(1);
-const final = ud2.reduce((fin, cu) => fin !== undefined ? fin[0] < cu[0] ? fin[1] < cu[1] ? fin : cu : cu[1] < fin[1] ? cu : fin : cu);
+// console.log(ud2);
+const final = ud2.reduce((fin, cu) => {
+  if (cu !== undefined) {
+    // const finData = Math.abs(fin[0]) + Math.abs(fin[1]);
+    const cuData = Math.abs(cu[0]) + Math.abs(cu[1]);
+    // console.log("fi",fin);
+    // console.log("cu",cuData);
+    return (fin < cuData) ? fin : cuData;
+  }
+  return fin;
+},Infinity);
 console.log(final);
-const distance = final[0] + final[1];
-console.log(distance)
