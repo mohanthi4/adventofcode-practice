@@ -23,12 +23,29 @@ export const roundedDivision = (mass) => {
   return Math.floor(mass / 3);
 };
 
-export const fuelRequirement = (mass) => {
+// export const fuelRequirement = (mass) => {
+//   const roundedThirdPart = roundedDivision(mass);
+//   return roundedThirdPart - 2;
+// };
+
+// export const totalFuelPart1 = (mass) => {
+//   const data = mass.split("\n");
+//   return data.reduce((sum,current) => sum + fuelRequirement(parseInt(current)),0)
+// };
+
+ export const fuelRequirement2 = (mass) => {
   const roundedThirdPart = roundedDivision(mass);
-  return roundedThirdPart - 2;
+  const fuel = roundedThirdPart - 2;
+   const finalFuel = fuel > 0 ? fuel + fuelRequirement2(fuel) : 0;
+   console.log(finalFuel)
+  return finalFuel;
 };
 
-export const totalFuel = (mass) => {
+export const totalFuelPart2 = (mass) => {
   const data = mass.split("\n");
-  return data.reduce((sum,current) => sum + fuelRequirement(parseInt(current)),0)
+  return data.reduce((sum, current) => {
+    const w = sum + fuelRequirement2(parseInt(current));
+    // console.log(w)
+    return w;
+  }, 0)
 };
