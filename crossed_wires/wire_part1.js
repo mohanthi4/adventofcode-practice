@@ -1,5 +1,6 @@
 import { distinct } from "jsr:@std/collections";
 
+
 const instructions = (data, array, { x, y }) => {
   // console.log(data)
   const val = parseInt(data.slice(1));
@@ -32,34 +33,36 @@ const instructions = (data, array, { x, y }) => {
   }
 };
 
-const ins = "R75,D30,R83,U83,L12,D49,R71,U7,L72";
-const instru = ins.split(",");
+const wire1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72";
+const wire1Instructions = wire1.split(",");
 // console.log(instru)
-let arr = [];
-let axixs = { x: 0, y: 0 };
-for (let i = 0; i < instru.length; i++) {
-  axixs = instructions(instru[i], arr, axixs);
+let wire1Path = [];
+let axis1 = { x: 0, y: 0 };
+for (let points = 0; points < wire1Instructions.length; points++) {
+  axis1 = instructions(wire1Instructions[points], wire1Path, axis1);
   // console.log(axixs.x);
   // console.log(axixs.y);
 }
 // console.log(arr);
 
 // console.log("..........");
-const ins2 = "U62,R66,U55,R34,D71,R55,D58,R83";
-const instru2 = ins2.split(",");
+
+
+const wire2 = "U62,R66,U55,R34,D71,R55,D58,R83";
+const wire2Instructions = wire2.split(",");
 // console.log(instru2)
-let arr2 = [];
-let axixs2 = { x: 0, y: 0 };
-for (let i = 0; i < instru2.length; i++) {
-  axixs2 = instructions(instru2[i], arr2, axixs2);
+let wire2Path = [];
+let axis2 = { x: 0, y: 0 };
+for (let points = 0; points < wire2Instructions.length; points++) {
+  axis2 = instructions(wire2Instructions[points], wire2Path, axis2);
   // console.log(axixs2.x);
   // console.log(axixs2.y);
 }
 // console.log(arr2);
 
-const data1 = arr.map((x) => {
-  for (let i = 0; i < arr2.length; i++) {
-    if (x[0] === arr2[i][0]) { if (x[1] === arr2[i][1]) return arr2[i]; }
+const data1 = wire1Path.map((x) => {
+  for (let i = 0; i < wire2Path.length; i++) {
+    if (x[0] === wire2Path[i][0]) { if (x[1] === wire2Path[i][1]) return wire2Path[i]; }
   }
 });
 
