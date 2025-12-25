@@ -5,15 +5,12 @@
 
 let numberOFTimes = 0;
 
-// const i = 111122
 for (let i = 240920; i <= 789857; i++) {
   const r = String(i);
-  // console.log(r)
   const exp = /(\d)\1/g;
   const d = exp.test(r);
-  // console.log(d)
   if (d) {
-    // console.log(d);
+
    const s = r.split("");
 
     const q = s.reduce((count, current) => {
@@ -23,7 +20,7 @@ for (let i = 240920; i <= 789857; i++) {
     }, {});
 
     const sw = Object.entries(q).filter(x => x[1] === 2);
-    // console.log(sw);
+
     if (sw.length > 0) {
       
           const rq = r.split("");
@@ -35,7 +32,7 @@ for (let i = 240920; i <= 789857; i++) {
             }
           }
       if (w) {
-            // console.log(i)
+
             numberOFTimes++;
           }
       
